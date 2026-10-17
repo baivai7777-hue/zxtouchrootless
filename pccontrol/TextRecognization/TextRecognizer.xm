@@ -41,6 +41,11 @@ NSString* performTextRecognizerTextFromRawData(UInt8* eventData, NSError** error
         NSString* languagesData = data[5];
         BOOL correct = [data[6] boolValue];
         NSString* debugPath = data[7];
+        // 第 9、10 个字段可选：cpu_only(0/1)、revision(0=默认)。老客户端不传，行为不变。
+        BOOL cpuOnly = NO;
+        int revisionData = 0;
+        if ([data count] >= 9 && [data[8] length] > 0) cpuOnly = [data[8] boolValue];
+        if ([data count] >= 10 && [data[9] length] > 0) revisionData = [data[9] intValue];
 
         // parse rect part
         NSArray *rect = [rectData componentsSeparatedByString:@",,"];
@@ -91,6 +96,8 @@ NSString* performTextRecognizerTextFromRawData(UInt8* eventData, NSError** error
             [ocrManager setLanguages:languages];
         }
         [ocrManager setCorrection:correct];
+        [ocrManager setCPUOnly:cpuOnly];
+        [ocrManager setRevision:revisionData];
 
         NSString* result = [ocrManager recognize:error];
 

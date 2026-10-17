@@ -12,6 +12,7 @@
 #define DEVICE_INFO_TASK_GET_DEVICE_INFO 30
 #define DEVICE_INFO_TASK_GET_BATTERY_INFO 31
 #define DEVICE_INFO_TASK_GET_RUNTIME_STATUS 32
+#define DEVICE_INFO_TASK_GET_FEATURES 33  // 这台手机的 ZXTouch 支持哪些扩展（电脑端据此决定传不传新参数）
 
 NSString *getDeviceInfoFromRawData(UInt8* eventData, NSError **error);
 

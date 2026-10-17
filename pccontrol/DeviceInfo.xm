@@ -70,6 +70,10 @@ NSString *getDeviceInfoFromRawData(UInt8* eventData, NSError **error)
         if (bundleIdentifier.length == 0) bundleIdentifier = @"com.apple.springboard";
         return [NSString stringWithFormat:@"%@;;%d;;%d", bundleIdentifier, isScriptPlaying(), isRecordingStart()];
     }
+    else if (task == DEVICE_INFO_TASK_GET_FEATURES)
+    {
+        return @"screenshot_scale,screenshot_diff,ocr_cpu_only,ocr_revision;;1.0.2";
+    }
     else
     {
         *error = [NSError errorWithDomain:@"com.zjx.zxtouchsp" code:999 userInfo:@{NSLocalizedDescriptionKey:[NSString stringWithFormat:@"-1;;Unknown device info task type. The task you provide: %d\r\n", task]}];

@@ -301,5 +301,18 @@ Return area that contain text
     request.usesLanguageCorrection = correct;
 }
 
+- (void)setCPUOnly:(BOOL)cpuOnly {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    request.usesCPUOnly = cpuOnly;
+#pragma clang diagnostic pop
+}
+
+- (void)setRevision:(int)revision {
+    if (revision > 0) {
+        request.revision = (NSUInteger)revision;
+    }
+}
+
 
 @end
